@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-content">
+            
+            <div>
+                <img class="second-page-photo" src="pic3.png" alt="">
+            </div>
+            
+        </div>
+        <div class="second-page-right-content">
+            
+            <div class="steps">
+                <div class="steps-top">
+                    <div id="one">1</div>
+                    <div class="line"></div>
+                    <div id="two">2</div>
+                </div>
+                <div class="steps-bottom">
+                    <span class="personal-information">Personal information</span>
+                    <span class="chess-experience">Chess experience</span>
+                </div>
+
+
+
+
+    <h2 class="personal-info2">Choose your level and teacher</h2>
+    <select name="სირთულე" class="sarchevi"> <br> 
+    <option id="op" value="ადვილი">Beginner</option>
+    <option id="opp" value="საშუალო">Intermediate</option>
+    <option id="opp" value="რთული">Professional</option>
+    
+    </select> 
+    
+
+    <div id="choose-right" >
+        <button id="character-btn" onclick="dropdown()">Choose your character</button>
+        <div class="app">
+            <ul id="app-list"></ul>
+        </div>
+    </div> 
+    
+        
+      
+<script>
+
+function dropdown(){
+        fetch('https://reqres.in/api/users?page=2',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/JSON'
+            }
+        })
+        .then(function(response){
+            if(response.status !==200){
+                throw error
+            }
+            return response.json()
+        })
+        .then(function(responseData){
+            responseData.data.forEach(item=> {
+                let li = document.createElement('li')
+                let span = document.createElement('span')
+                span.textContent = item.first_name + " " + item.last_name;
+                
+                let img = document.createElement('img')
+                img.src = item.avatar
+                img.style.width = '25px'
+                img.style.marginRight = '20px'
+                img.style.float = 'right'
+
+                var div = document.querySelector('.app')
+                div.style.display = 'block'
+                
+
+                let list = document.getElementById('app-list')
+                list.style.listStyleType = 'none'
+                list.style.display = 'flex'
+                list.style.flexDirection = 'column'
+                list.style.textAlign = 'start'
+                li.style.marginBottom = '5px'
+                li.appendChild(span)
+                li.appendChild(img)
+                list.appendChild(li)
+
+                span.addEventListener('click', chooseCharacter)
+                function chooseCharacter(){
+                    if(span.click){
+                        var btn = document.getElementById('character-btn')
+                        btn.innerHTML = span.innerHTML
+                        div.style.display = 'none'
+                        return true
+                    }
+                }
+
+                
+           
+            });
+            
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+
+    }
+
+
+    </script>
+
+
+    <div class="btn-next-s">
+    <a class="next-a-s" href="4.html"><button type="submit" class="next-sd" >Next
+    </button></a>
+    </div>
+</body>
+</html>
+

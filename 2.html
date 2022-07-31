@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"href="style.css">
+    
+</head>
+<body>    
+    <div class="container">
+        <div class="left-content">
+            
+            <div>
+                <img class="second-page-photo" src="pic2.png" alt="">
+            </div>
+            
+        </div>
+        <div class="second-page-right-content">
+            
+            <div class="steps">
+                <div class="steps-top">
+                    <div id="one">1</div>
+                    <div class="line"></div>
+                    <div id="two">2</div>
+                </div>
+                <div class="steps-bottom">
+                    <span class="personal-information">Personal information</span>
+                    <span class="chess-experience">Chess experience</span>
+                </div>
+            </div>
+            <div class="div-info">
+                <p class="personal-info">Personal information</p>
+                <p class="basic-info">This is basic informaton fields</p>
+            </div>
+            <div>
+                
+                <form id="registration" >
+                    <div>
+                        <div id="username-div">
+                            <input id="username" type="text" name="username" placeholder="Name *">
+                        </div>
+                        <div id="error_username" class="error"></div>
+                    </div>
+                    <div>
+                        <div id="mail-div">
+                            <input id="mail" type="email" name="email" placeholder="Email address *">
+                        </div>
+                        <div id="error_email" class="error"></div>
+                    </div>
+                    <div>
+                        <div id="tel-div">
+                            <input id="tel" type="tel" name="tel" placeholder="Phone number *">
+                        </div>
+                        <div id="error_tel" class="error"></div>
+                    </div>
+                    <div>
+                        <div id="date-div">
+                            <input id="date" type="date" name="date" placeholder="Date of Birth *">
+                        </div>
+                    </div>
+                    <div class="buttons-s">
+                        <div class="btn-back-s">
+                            <a class="back-a-s" href="1.html"><button class="back-s">Back</button></a>
+                        </div>
+                        <div class="btn-next-s">
+                            <a class="next-a-s" href="3.html"><button type="submit" id="next-s" >Next
+                            </button></a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        let registrationForm = document.getElementById('next-s');
+
+        registrationForm.addEventListener('click',function(e){
+            e.preventDefault(); 
+
+            let form = e.target; 
+            let errors = {}; 
+
+            let username = document.querySelector('[name = "username"]').value; 
+            if(username.length < 5){ 
+                errors.username = "Min 5 letters"; 
+            }
+
+            let email = document.querySelector('[name = "email"]').value;
+            if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
+                errors.email = "Invalid Email"
+   
+            }
+            let phone = document.querySelector('[name = "tel"]').value; 
+            if(phone.length < 1){ 
+                errors.phone = "Mobile Number is Required"; 
+            }
+        
+            form.querySelectorAll('.error').forEach(item => {
+                item.textContent = '';
+            });
+            
+            for (let name in errors){
+                let namePlacedolder = document.getElementById('error_' + name); 
+                if(namePlacedolder) {
+                    namePlacedolder.textContent = errors[name]; 
+                }
+                form.querySelector('[name = "'+ name +'"]').classList.add('error');
+            }
+
+            form.submit(); 
+
+
+            console.log(errors)
+        })
+
+
+
+    </script>
+
+
+</body>
+</html>
